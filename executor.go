@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+	"path"
 )
 
 // Executes grep for the given user input across machines.
@@ -63,8 +64,12 @@ func executeGrepOverSsh(input []string, machineInfo MachineInfo) (string, error)
 	// TODO this will fail for commands such as grep -i "error failed", due to the double quotes
 	// grepCommand := exec.Command("grep", input[1:]...)
 
-	out, err := executeCommandOverSsh(machineInfo.user, machineInfo.address, "/home/sriramdvt/.ssh/id_ecdsa", input)
-	fmt.Println(string(out))
+	input = append([]string{"grep -E"}, input...)
+	logFilePath := path.Join(LogFolderPath, machineInfo.logFileName)
+	grepCommandToRun := append(input, logFilePath)
+
+	out, err := executeCommandOverSsh(machineInfo.user, machineInfo.address, "/home/sriramdvt/.ssh/id_ecdsa", grepCommandToRun)
+	// fmt.Println(string(out))
 
 	if err != nil {
 		// This could happen with invalid file (status 2), or if no results (status 1).

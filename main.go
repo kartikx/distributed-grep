@@ -10,10 +10,10 @@ import (
 func main() {
 	fmt.Println(WelcomePrompt)
 
-	makeLogFiles(MachineMap)
+	// makeLogFiles(MachineMap)
 
 	for {
-		fmt.Print("Enter command: ")
+		fmt.Print("Enter grep regex pattern (in single/double quotes):")
 
 		reader := bufio.NewReader(os.Stdin)
 		line, err := reader.ReadString('\n')

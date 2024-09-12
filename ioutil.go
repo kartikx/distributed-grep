@@ -24,7 +24,8 @@ func PrintGatheredOutput(gatheredOutput map[string]string) {
 		}
 
 		fmt.Println("==== " + machine + " ================")
-		fmt.Println(output)
+		numLinesInGrepOutput := strings.Count(output, "\n")
+		fmt.Printf("%d lines\n", numLinesInGrepOutput)
 	}
 	fmt.Println("====")
 }
