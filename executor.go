@@ -1,11 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"math/rand"
-	"os/exec"
-	"path"
 	"time"
 )
 
@@ -55,28 +52,19 @@ func executeGrepOnMachine(input []string, machineName string, machineInfo Machin
 	// TODO Eventually remove sleep. Current present for testing concurrency.
 	time.Sleep(time.Duration(rand.Intn(2)) * time.Second)
 
-	fmt.Println("Executed grep: ", machineName)
+	fmt.Println("Executed grep on ", machineName)
 	outChan <- GrepOutput{machineName, grepOutput}
 }
 
 // TODO Use pointers. How are arrays passed?
 func executeGrepOverSsh(input []string, machineInfo MachineInfo) (string, error) {
-	logFilePath := path.Join(LogFolderPath, machineInfo.logFileName)
-
-	input = append(input, logFilePath)
 
 	// TODO replace with a function that invokes ssh.
 	// TODO this will fail for commands such as grep -i "error failed", due to the double quotes
-	grepCommand := exec.Command("grep", input[1:]...)
+	// grepCommand := exec.Command("grep", input[1:]...)
 
-	// fmt.Println("Args: ", grepCommand.Args)
-
-	var out bytes.Buffer
-	var stderr bytes.Buffer
-	grepCommand.Stdout = &out
-	grepCommand.Stderr = &stderr
-
-	err := grepCommand.Run()
+	out, err := executeCommandOverSsh(machineInfo.user, machineInfo.address, "/home/sriramdvt/.ssh/id_ecdsa", input)
+	fmt.Println(string(out))
 
 	if err != nil {
 		// This could happen with invalid file (status 2), or if no results (status 1).
@@ -85,5 +73,5 @@ func executeGrepOverSsh(input []string, machineInfo MachineInfo) (string, error)
 	}
 
 	// TODO could this fail? Add nil check.
-	return out.String(), nil
+	return string(out), nil
 }

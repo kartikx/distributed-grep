@@ -2,6 +2,7 @@ package main
 
 // Models the information about a Machine.
 type MachineInfo struct {
+	user		string
 	address     string
 	logFileName string
 }

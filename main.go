@@ -10,6 +10,8 @@ import (
 func main() {
 	fmt.Println(WelcomePrompt)
 
+	makeLogFiles(MachineMap)
+
 	for {
 		fmt.Print("Enter command: ")
 
