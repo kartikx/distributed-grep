@@ -68,7 +68,7 @@ func executeGrepOverSsh(input []string, machineInfo MachineInfo) (string, error)
 	logFilePath := path.Join(LogFolderPath, machineInfo.logFileName)
 	grepCommandToRun := append(input, logFilePath)
 
-	out, err := executeCommandOverSsh(machineInfo.user, machineInfo.address, "/home/sriramdvt/.ssh/id_ecdsa", grepCommandToRun)
+	out, err := executeCommandOverSsh(machineInfo.user, machineInfo.address, "/home/sdevata2/.ssh/id_ecdsa", grepCommandToRun)
 	// fmt.Println(string(out))
 
 	if err != nil {
