@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 )
 
 func main() {
@@ -22,7 +23,11 @@ func main() {
 
 		line = SanitizeUserInput(line)
 
+		executionStartTime := time.Now()
+
 		output, _ := ExecuteGrepOnMachines(line, MachineMap)
+
+		fmt.Printf("grep %s took %v\n", line, time.Since(executionStartTime))
 
 		PrintGatheredOutput(output)
 	}

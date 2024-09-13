@@ -25,7 +25,7 @@ func ExecuteGrepOnMachines(input string, machines map[string]MachineInfo) (map[s
 			if len(val.output) != 0 {
 				finalOutput[val.machineName] = strings.Split(val.output, "\n")
 			}
-		case <-time.After(60 * time.Second):
+		case <-time.After(20 * time.Second):
 			fmt.Println("Timeout. Didn't hear back from expected number of machines.")
 			return finalOutput, nil
 		}
