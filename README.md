@@ -1,15 +1,19 @@
 # Distributed Grep
-
 To run, in the home folder execute
 
 ```
 go run .
 ```
 
-Next, in the prompt enter a grep input without file names. For example:
+Next, in the prompt simply enter the regex query you would like to search for.
 
+For example:
 ```
-Enter Command: grep -i error
+Enter grep regex pattern (in single/double quotes): "DEBUG"
 ```
 
-
+## Running Tests
+In the home directry, execute
+```
+go test
+```

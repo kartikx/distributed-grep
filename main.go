@@ -8,9 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println(WelcomePrompt)
-
-	// makeLogFiles(MachineMap)
+	fmt.Print(WelcomePrompt)
 
 	for {
 		fmt.Print("Enter grep regex pattern (in single/double quotes):")
@@ -22,11 +20,9 @@ func main() {
 			log.Fatal(err)
 		}
 
-		parsedInput := ParseUserInput(line)
+		line = SanitizeUserInput(line)
 
-		// TODO Add validations for user input. Use function from IOInput.
-
-		output, _ := ExecuteGrepOnMachines(parsedInput, MachineMap)
+		output, _ := ExecuteGrepOnMachines(line, MachineMap)
 
 		PrintGatheredOutput(output)
 	}

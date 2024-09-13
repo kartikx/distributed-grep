@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -15,33 +16,52 @@ const WelcomePrompt = `
   \_____\____/   \/   |_|    |______|_|    |______| |_____|_| \_|\_____|                                                                        
 `
 
-// Prints the aggregated grep result to the console.
-func PrintGatheredOutput(gatheredOutput map[string]string) {
-	fmt.Println("==== OUTPUT ================")
+// Prints the grep result to the console.
+// Stores individual VM results on the client machine.
+func PrintGatheredOutput(gatheredOutput map[string][]string) {
+	lineCount := 0
+	fmt.Println("===OUTPUT===")
+
 	for machine, output := range gatheredOutput {
 		if len(output) == 0 {
 			continue
 		}
 
-		fmt.Println("==== " + machine + " ================")
-		numLinesInGrepOutput := strings.Count(output, "\n")
-		fmt.Printf("%d lines\n", numLinesInGrepOutput)
+		fmt.Printf("%s: [%d lines]\n", machine, len(output))
+
+		writeOutputToFile(machine, output)
+
+		lineCount += len(output)
 	}
-	fmt.Println("====")
+
+	fmt.Printf("Total number of matched lines: %d\n\n", lineCount)
+
+	if lineCount > 0 {
+		fmt.Printf("\nLine matches were written to named files on this machine.\n\n")
+	}
 }
 
-func ParseUserInput(input string) []string {
-	// Remove trailing new line.
-	input = input[:len(input)-1]
-
-	return strings.Split(input, " ")
+func SanitizeUserInput(input string) string {
+	return strings.TrimSpace(input)
 }
 
-// Validate that the first token is "grep"
-// Handle quotes if required
-// Optionally, handle injections.
-func ValidateUserInput(input []string) error {
-	// TODO implement.
+// Writes the output of the queried machine to a file on the client machine for easy querying.
+func writeOutputToFile(machine string, output []string) {
+	filename := machine + ".out"
+	file, err := os.Create(filename)
 
-	return nil
+	if err != nil {
+		fmt.Printf("Unable to create file %s: %v\n", filename, err)
+		return
+	}
+
+	content := strings.Join(output, "\n")
+	content += "\n"
+
+	_, err = file.WriteString(content)
+
+	if err != nil {
+		fmt.Printf("Unable to write output to file %s: %v\n", filename, err)
+		return
+	}
 }
