@@ -10,27 +10,52 @@ type grepTest struct {
 	matchCountByMachine map[string]int
 }
 
-// TODO @sriramdvt Replace query strings and results with what's indicated for the demos.
-// I.e. one frequent, one infrequent, one regex.
 // List of test cases.
 var grepTests = []grepTest{
 	{
-		"ERROR",
+		"GET",
 		map[string]int{
-			"machine-1": 2,
-			"machine-2": 2,
+			"machine-1": 170372,
+			"machine-2": 160563,
+			"machine-3": 161169,
+			"machine-4": 162590,
+			"machine-5": 162714,
+			"machine-6": 161189,
+			"machine-7": 161050,
+			"machine-8": 164776,
+			"machine-9": 161852,
+			"machine-10": 159130,
 		},
 	},
 	{
-		"DEBUG",
+		"DELETE",
 		map[string]int{
-			"machine-1": 12,
-			"machine-2": 10,
+			"machine-1": 27976,
+			"machine-2": 26754,
+			"machine-3": 26854,
+			"machine-4": 27144,
+			"machine-5": 27293,
+			"machine-6": 26846,
+			"machine-7": 27031,
+			"machine-8": 27294,
+			"machine-9": 26898,
+			"machine-10": 26437,
 		},
 	},
 	{
-		"NON-EXISTENT",
-		map[string]int{},
+		"400*", // '40' and 0 or more '0'
+		map[string]int{
+			"machine-1": 45543,
+			"machine-2": 43031,
+			"machine-3": 42820,
+			"machine-4": 43413,
+			"machine-5": 43410,
+			"machine-6": 43447,
+			"machine-7": 42846,
+			"machine-8": 44019,
+			"machine-9": 43506,
+			"machine-10": 42846,
+		},
 	},
 }
 
