@@ -13,7 +13,7 @@ Enter grep regex pattern (in single/double quotes):"DEBUG"
 ```
 
 ## Running Tests
-In the home directry, execute
+In the home directory, execute
 ```
 go test
 ```
