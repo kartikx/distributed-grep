@@ -8,5 +8,6 @@ do
    echo "$vm_count $each_vm_machine"
    ls ../data/vm${vm_count}.log
    scp ../data/vm${vm_count}.log "sdevata2@${each_vm_machine}:~/machine.${vm_count}.log"
+   scp ../data/machine.${vm_count}.log.test "sdevata2@${each_vm_machine}:~/machine.${vm_count}.log.test"
    (( vm_count++ ))
 done
