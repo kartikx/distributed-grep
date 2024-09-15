@@ -89,7 +89,7 @@ func makeLogFiles(machines map[string]MachineInfo) {
 		command_make_log_split := strings.Split(command_make_log, " ")
 	
 		// Execute the command to populate the logfile
-		output, err := ExecuteCommandOverSsh(info.user, info.address, "/home/sdevata2/.ssh/id_ecdsa", command_make_log_split)
+		output, err := ExecuteCommandOverSsh(info.user, info.address, sshKeyPath, command_make_log_split)
 		if err != nil {
 			log.Fatal(err)
 		}
