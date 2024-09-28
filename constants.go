@@ -32,4 +32,4 @@ var TestMachineMap = map[string]MachineInfo{
 }
 
 // The path to the folder containing the log files.
-const LogFolderPath = "~/mp2"
+const LogFolderPath = "~/mp2-g64"
