@@ -4,10 +4,10 @@ declare -a allvms=("fa24-cs425-6401.cs.illinois.edu" "fa24-cs425-6402.cs.illinoi
 
 for each_vm_machine in "${allvms[@]}"
 do
-	ssh-copy-id -i ~/.ssh/id_ecdsa.pub "sdevata2@${each_vm_machine}"
+	ssh-copy-id -i ~/.ssh/id_ecdsa.pub "kartikr2@${each_vm_machine}"
 done
 
 for each_vm_machine in "${allvms[@]}"
 do
-	ssh "sdevata2@${each_vm_machine}" -t \"ls\"
+	ssh "kartikr2@${each_vm_machine}" -t \"ls\"
 done

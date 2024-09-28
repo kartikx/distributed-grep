@@ -1,7 +1,7 @@
 package main
 
-const userNetId = "sdevata2"
-const sshKeyPath = "/home/sdevata2/.ssh/id_ecdsa"
+const userNetId = "kartikr2"
+const sshKeyPath = "/home/kartikr2/.ssh/id_ecdsa"
 
 // Maps the machine identifiers to machine information.
 var MachineMap = map[string]MachineInfo{
