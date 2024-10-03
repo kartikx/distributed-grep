@@ -1,4 +1,6 @@
 # Distributed Grep
+This repository contains an implementation of Distributed Grep over a cluster of VMs. A search query on any one VM, efficiently queries all connected VMs and returns an aggregated response.
+
 To run, in the home folder execute
 
 ```
